@@ -1,0 +1,25 @@
+::ng-deep {
+  @mixin order-state ($bg, $fc) {
+    text-align: center;
+    background-color: $bg;
+    color: $fc;
+  }
+  .order-state-failed {
+    @include order-state(darkred, yellow);
+  }
+  .order-state-cancelled {
+    @include order-state(crimson, white);
+  }
+  .order-state-active {
+    @include order-state(blue, white);
+  }
+  .order-state-filled {
+    @include order-state(darkgreen, yellow);
+  }
+
+  .tabs-container {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+  }
+}

@@ -79,8 +79,9 @@
   .content {
     display: flex;
     justify-content: space-around;
+    flex-direction: column;
     width: 100%;
-    max-width: 700px;
+    //max-width: 700px;
     margin-bottom: 3rem;
   }
 
@@ -179,11 +180,23 @@
 
 <main class="main">
   <div class="content">
-
-
-    <h1>Welcome Example</h1>
-
-
+    <div class="tabs-container">
+      <app-filter-tab
+        [tabs]="productTypeTabs"
+        (tabSelected$)="productTypeTabSelected($event)"
+      ></app-filter-tab>
+      <app-filter-tab
+        [tabs]="stateTabs"
+        (tabSelected$)="stateTabSelected($event)"
+      ></app-filter-tab>
+    </div>
+    <ag-grid-angular
+      class="ag-theme-quartz"
+      style="height: 600px; width: 100%"
+      [columnDefs]="columnDefs"
+      [gridOptions]="options"
+      [rowData]="[]"
+    />
   </div>
 </main>
 

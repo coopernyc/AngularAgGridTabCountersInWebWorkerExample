@@ -1,0 +1,30 @@
+:host {
+  flex: 1 32px;
+  display: flex;
+  .filter-tab-container {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    padding: 0 1em;
+    .filter-tab {
+      flex: 1;
+      display: flex;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      border: 1px solid #ccc;
+      padding: 8px 4px;
+      cursor: pointer;
+      color: #777;
+      &.filter-tab-selected {
+        border-color: #fff;
+        background-color: #369;
+        color: #fff;
+      }
+      &:hover {
+        background-color: #555;
+        border-color: #333;
+        color: #eee;
+      }
+    }
+  }
+}
