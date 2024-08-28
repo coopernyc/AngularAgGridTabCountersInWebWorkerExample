@@ -29,11 +29,4 @@ export class GridModel<K, T> extends Model<K, T> {
       this.gridApi.setGridOption('rowData', this.values);
     }
   }
-
-  // public override set predicate(filter: (value: T, key: K) => boolean) {
-  //   super.predicate = filter;
-  //   if (this.gridApi) {
-  //     this.gridApi.setGridOption('rowData', this.values);
-  //   }
-  // }
 }

@@ -16,6 +16,9 @@
   .order-state-filled {
     @include order-state(darkgreen, yellow);
   }
+  .numeric {
+    text-align: right;
+  }
 
   .tabs-container {
     flex: 1;

@@ -32,7 +32,7 @@ export class AppComponent {
     { field: "State", valueFormatter: params => params.value.toUpperCase(), cellClass: params => 'order-state-' + params.value.toLowerCase(), maxWidth: 160 },
     { field: "ProductType", headerName: "Product Type", maxWidth: 160 },
     { field: "Currency", maxWidth: 100 },
-    { field: "Price", valueFormatter: params => params.value.toFixed(2) }
+    { field: "Price", valueFormatter: params => params.value.toFixed(2), cellClass: 'numeric', width: 100 }
 
   ];
   public options: GridOptions = {
@@ -106,12 +106,10 @@ export class AppComponent {
       }
       return x;
     }));
-
+    const statesSelected = this.stateTabsModel.model.filter(x => x.selected);
     this.model.predicate = (v) => {
-      let cond: boolean = false;
-      if (!this.stateTabsModel.model.count()) {
-        cond = true;
-      } else {
+      let cond: boolean = !statesSelected.count();
+      if (statesSelected.count()) {
         this.stateTabsModel.model.filter(x => x.selected).forEach(x => {
           cond = cond || x.predicate(v);
         });

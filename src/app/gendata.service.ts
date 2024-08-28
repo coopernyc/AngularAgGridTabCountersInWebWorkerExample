@@ -15,7 +15,7 @@ export class GenDataService {
     this.publish$ = range(1, 10000).pipe(
       concatMap(() => {
         const order: IOrder = {
-          OrderId: 'ORDER-' + _.padStart(Math.floor(Math.random() * 101).toString(), 5, '0'),
+          OrderId: 'ORDER-' + _.padStart(1 + Math.floor(Math.random() * 10000).toString(), 5, '0'),
           Price: Math.random() * 100,
           State: _.sample(Object.values(OrderStateEnum)) as OrderStateEnum,
           Currency: _.sample(Object.values(CurrencyEnum)) as CurrencyEnum,
