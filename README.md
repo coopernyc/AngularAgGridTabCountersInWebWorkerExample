@@ -18,6 +18,10 @@ Below is an example of selecting Commodity electronic and basket orders in Cance
 
 Example application generates 10000 random orders (new and updates by OrderId) with high random frequency. 
 
-Application receives order updates, it throttles update order events and picks only most recent order updates by specified interval, then it sends resulting small batch of updates for delta transaction update/rendering to the Blotter grid and to the spawned Web Worker which performs order counts calculation in a separate thread. 
+Application receives order updates, it throttles update events and picks only most recent order updates by interval, then it sends resulting small batch of updates for delta transaction update/rendering to the Blotter grid and to the Web Worker for order counts calculation. 
 
 Worker keeps it's tab/orders data in sync by receiving tab configuration /selection changes and batches of order updates from main application. Since data is copied between thread it is important to maintain small batches to minimize costs of serialization/deserialization between threads.
+
+Worker uses lazy sampling to performs calculation of counts by interval and only if there are changes.
+
+Application is using [Ag-Grid](www.ag-grid.com) for the Blotter. Ag-Grid supports delta/transaction updates for speed rendering of changes.
