@@ -28,40 +28,54 @@ import {CurrencyRenderer} from "./currency.renderer";
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'AngularAgGridTabCountersWebWorkerExample';
-  private readonly numberFormatter = new Intl.NumberFormat('en-US');
-  public columnDefs: ColDef[] = [
-    { field: "OrderId", headerName: "Order ID", cellClass: 'order-id', maxWidth: 160 },
-    { field: "OrderType", headerName: "Order Type", cellClass: params => 'order-type-' + params.value.toLowerCase(), maxWidth: 150 },
-    { field: "State", headerName: "Order State", valueFormatter: params => params.value.toUpperCase(), cellClass: params => 'order-state-' + params.value.toLowerCase(), maxWidth: 160 },
-    { field: "ProductType", headerName: "Product Type", maxWidth: 160 },
-    { field: "Quantity", valueFormatter: params => this.numberFormatter.format(params.value.toFixed(0)), cellClass: 'numeric', width: 100 },
-    { field: "Side", cellClass: params => 'order-side-' + params.value.toLowerCase(), maxWidth: 80 },
-    { field: "Currency", maxWidth: 100, cellRenderer: CurrencyRenderer },
-    { field: "Price", valueFormatter: params => this.numberFormatter.format(params.value.toFixed(2)), cellClass: 'numeric', width: 100 },
-    { field: "Broker", width: 150 },
-    { field: "BasketId", headerName: "Basket ID", maxWidth: 120 },
-    { field: "OrderTime", headerName: "Order Time", maxWidth: 200 },
-    { field: "Trader", headerName: "Trader", maxWidth: 200 },
-  ];
-  public options: GridOptions = {
-    onGridReady: this.gridReady.bind(this),
-    getRowId: (params: GetRowIdParams) => {
-      return params.data.OrderId;
-    }
-  }
+
+
   private readonly model: GridModel<string, IOrder> = new GridModel<string, IOrder>((value: IOrder) => value.OrderId);
   private readonly destroyRef = inject(DestroyRef);
   private readonly THROTTLE_TIME = 300;
-
-  private productTypeTabsModel: Model<string, IFilterTab> = new Model<string, IFilterTab>((tab: IFilterTab) => tab.id);
-  private stateTabsModel: Model<string, IFilterTab> = new Model<string, IFilterTab>((tab: IFilterTab) => tab.id);
-  private extraTabsModel: Model<string, IFilterTab> = new Model<string, IFilterTab>((tab: IFilterTab) => tab.id);
-
+  private readonly worker: Worker | undefined;
+  private readonly numberFormatter = new Intl.NumberFormat('en-US');
+  private readonly productTypeTabsModel: Model<string, IFilterTab> = new Model<string, IFilterTab>((tab: IFilterTab) => tab.id);
+  private readonly stateTabsModel: Model<string, IFilterTab> = new Model<string, IFilterTab>((tab: IFilterTab) => tab.id);
+  private readonly extraTabsModel: Model<string, IFilterTab> = new Model<string, IFilterTab>((tab: IFilterTab) => tab.id);
   private stateSelectedTabSelectedId!: string[];
   private productTypeTabSelectedId!: string;
-
-  private readonly worker: Worker | undefined;
+  public readonly title: string = 'AngularAgGridTabCountersWebWorkerExample';
+  public columnDefs: ColDef[] = [
+    {field: "OrderId", headerName: "Order ID", cellClass: 'order-id', maxWidth: 160},
+    {
+      field: "OrderType",
+      headerName: "Order Type",
+      cellClass: params => 'order-type-' + params.value.toLowerCase(),
+      maxWidth: 150
+    },
+    {
+      field: "State",
+      headerName: "Order State",
+      valueFormatter: params => params.value.toUpperCase(),
+      cellClass: params => 'order-state-' + params.value.toLowerCase(),
+      maxWidth: 160
+    },
+    {field: "ProductType", headerName: "Product Type", maxWidth: 160},
+    {
+      field: "Quantity",
+      valueFormatter: params => this.numberFormatter.format(params.value.toFixed(0)),
+      cellClass: 'numeric',
+      width: 100
+    },
+    {field: "Side", cellClass: params => 'order-side-' + params.value.toLowerCase(), maxWidth: 80},
+    {field: "Currency", maxWidth: 100, cellRenderer: CurrencyRenderer},
+    {
+      field: "Price",
+      valueFormatter: params => this.numberFormatter.format(params.value.toFixed(2)),
+      cellClass: 'numeric',
+      width: 100
+    },
+    {field: "Broker", width: 150},
+    {field: "BasketId", headerName: "Basket ID", maxWidth: 120},
+    {field: "OrderTime", headerName: "Order Time", maxWidth: 200},
+    {field: "Trader", headerName: "Trader", maxWidth: 200},
+  ];
 
   constructor(private generator: GenDataService) {
 
@@ -116,48 +130,35 @@ export class AppComponent {
     ]);
   }
 
+  public options: GridOptions = {
+    onGridReady: this.gridReady.bind(this),
+    getRowId: (params: GetRowIdParams) => {
+      return params.data.OrderId;
+    }
+  }
+
   private gridReady(event: GridReadyEvent<any>) {
     this.model.gridApi = event.api;
+
+    const updateTab = (data: IOrder[], model: Model<string, IFilterTab>) => {
+      model.update(_.map(data, (v: any, k: string) => {
+        const tab = model.get(k)!;
+        if (tab) {
+          tab.counter = v;
+        }
+        return tab;
+      }).filter(tab => !!tab));
+    }
 
     if (this.worker) {
       this.worker.onmessage = ({data}) => {
         console.log('Blotter received tab counters');
-        let temp: IFilterTab[] = [];
-        _.forOwn(data, (v: any, k: string) => {
-          const tab = this.productTypeTabsModel.get(k);
-          if (tab) {
-            tab.counter = v;
-            temp.push(tab);
-          }
-        });
-        if (temp.length) {
-          this.productTypeTabsModel.update(temp);
-          temp = [];
-        }
-        _.forOwn(data, (v: any, k: string) => {
-          const tab = this.stateTabsModel.get(k);
-          if (tab) {
-            tab.counter = v;
-            temp.push(tab);
-          }
-        });
-        if (temp.length) {
-          this.stateTabsModel.update(temp);
-          temp = [];
-        }
-        _.forOwn(data, (v: any, k: string) => {
-          const tab = this.extraTabsModel.get(k);
-          if (tab) {
-            tab.counter = v;
-            temp.push(tab);
-          }
-        });
-        if (temp.length) {
-          this.extraTabsModel.update(temp);
-        }
+        updateTab(data, this.productTypeTabsModel);
+        updateTab(data, this.stateTabsModel);
+        updateTab(data, this.extraTabsModel);
       }
       this.worker.postMessage({
-        topic: WorkerTopic.Common,
+        topic: WorkerTopic.Setup,
         value: {
           product_type_tabs: this.productTypeTabsModel.values.map(x => _.omit(x, "predicate")),
           state_tabs: this.stateTabsModel.values.map(x => _.omit(x, "predicate")),

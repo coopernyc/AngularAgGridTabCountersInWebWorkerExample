@@ -11,9 +11,9 @@ import {IFilterTab} from "./common";
              [class.filter-tab-selected]="tab.selected"
              (click)="selectTab(tab)"
         >
-          <div class="filter-tab-header">{{tab.headerName}}</div>
+          <div class="filter-tab-header">{{ tab.headerName }}</div>
           @if (tab.counter && tab.counter > 0) {
-            <div class="filter-tab-counter" [class.critical]="tab.critical"><span>{{tab.counter}}</span></div>
+            <div class="filter-tab-counter" [class.critical]="tab.critical"><span>{{ tab.counter }}</span></div>
           }
         </div>
       }

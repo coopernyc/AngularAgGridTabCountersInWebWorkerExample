@@ -4,13 +4,11 @@ import {ICellRendererParams} from "ag-grid-community";
 
 @Component({
   standalone: true,
-  template: `<div>
-    <div [class]="'flag-' + value"></div>
-    <span>{{value}}</span>
-  </div>`
+  template: `<div [class]="'flag-' + value"></div><span>{{ value }}</span>`
 })
 export class CurrencyRenderer implements ICellRendererAngularComp {
   public value!: string;
+
   agInit(params: ICellRendererParams): void {
     this.refresh(params);
   }
