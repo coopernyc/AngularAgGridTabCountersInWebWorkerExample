@@ -12,7 +12,6 @@ export class GridModel<K, T> extends Model<K, T> {
   public updateGrid(v: T | T[]): void {
     if (this.gridApi) {
       const trans: IModelTransaction<T> = this.update(v);
-      console.log(trans);
       this.gridApi!.applyTransaction(trans);
     } else {
       throw new Error(`Grid is not ready`);

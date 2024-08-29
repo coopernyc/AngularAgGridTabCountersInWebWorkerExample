@@ -4,6 +4,14 @@
     background-color: $bg;
     color: $fc;
   }
+  @mixin order-side($fc) {
+    text-align: center;
+    color: $fc;
+    font-weight: bold;
+  }
+  .order-id {
+    font-weight: bold;
+  }
   .order-state-failed {
     @include order-state(darkred, yellow);
   }
@@ -15,6 +23,14 @@
   }
   .order-state-filled {
     @include order-state(darkgreen, yellow);
+  }
+  .order-side-buy,
+  .order-type-electronic {
+    @include order-side(darkgreen);
+  }
+  .order-side-sell,
+  .order-type-voice {
+    @include order-side(darkred);
   }
   .numeric {
     text-align: right;

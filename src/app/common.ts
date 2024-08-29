@@ -5,10 +5,10 @@ import {
     filter, finalize,
     map,
     MonoTypeOperatorFunction, Observable,
-    ObservableInput,
     pipe,
     ReplaySubject, takeUntil, takeWhile, tap
 } from "rxjs";
+import _ from "lodash";
 
 export enum OrderStateEnum {
     Active = "Active",
@@ -37,13 +37,21 @@ export interface IOrder {
     Price: number,
     State: OrderStateEnum,
     Currency: CurrencyEnum,
-    ProductType: ProductTypeEnum
+    ProductType: ProductTypeEnum,
+    Quantity: number,
+    Side: ('Buy'|'Sell'),
+    OrderType: ('Voice'|'Electronic'),
+    BasketId?: string,
+    OrderTime: string,
+    Trader: string,
+    Broker: string
 }
 
 export interface IFilterTab {
     id: string;
     headerName: string;
     counter?: number;
+    critical?: boolean;
     predicate: (v: any) => boolean;
     selected: boolean;
 }
@@ -100,14 +108,31 @@ export function lazySample<T>(
 }
 
 
-export function productTypePredicate(order: IOrder, productType: ProductTypeEnum): boolean {
+export function productTypePredicate(order: IOrder, productType: string): boolean {
+    if (productType === "All") {
+      return true;
+    }
     return order.ProductType === productType;
 }
 
-export function statePredicate(order: IOrder, state: OrderStateEnum): boolean {
+export function statePredicate(order: IOrder, state: string): boolean {
     return order.State === state;
 }
 
+export function voicePredicate(order: IOrder): boolean {
+  return order.OrderType === 'Voice';
+}
+
+export function electronicPredicate(order: IOrder): boolean {
+  return order.OrderType === 'Electronic';
+}
+
+export function basketPredicate(order: IOrder): boolean {
+  return !_.isEmpty(order.BasketId);
+}
+
 export enum WorkerTopic {
-  ModelUpdate
+  Common,
+  ModelUpdate,
+  TabSelectedChange
 }

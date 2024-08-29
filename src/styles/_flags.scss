@@ -1,0 +1,262 @@
+@mixin country-flag($pos) {
+  display: inline-block;
+  height: 11px !important;
+  width: 16px !important;
+  background: url('../../public/flags.png') $pos;
+  margin-right: 4px;
+  border: 1px solid #777;
+  align-self: center;
+  //padding-top: 2px;
+  box-shadow: 1px 1px 1px #333;
+}
+
+.flag-value { margin-left: 4px; }
+.flag-AD { @include country-flag(0px 0px); }
+.flag-AE, .flag-AED { @include country-flag(-16px 0px); }
+.flag-AF { @include country-flag(-32px 0px); }
+.flag-AG { @include country-flag(-48px 0px); }
+.flag-AI { @include country-flag(-64px 0px); }
+.flag-AL { @include country-flag(-80px 0px); }
+.flag-AM { @include country-flag(-96px 0px); }
+.flag-AN { @include country-flag(-112px 0px); }
+.flag-AO { @include country-flag(-128px 0px); }
+.flag-AR, .flag-ARS { @include country-flag(-144px 0px); }
+.flag-AS { @include country-flag(-160px 0px); }
+.flag-AT { @include country-flag(-176px 0px); }
+.flag-AU, .flag-AUD { @include country-flag(-192px 0px); }
+.flag-AW { @include country-flag(-208px 0px); }
+.flag-AX { @include country-flag(-224px 0px); }
+.flag-AZ { @include country-flag(-240px 0px); }
+.flag-BA { @include country-flag(-256px 0px); }
+.flag-BB { @include country-flag(-272px 0px); }
+.flag-BD { @include country-flag(-288px 0px); }
+.flag-BE { @include country-flag(0px -11px); }
+.flag-BF { @include country-flag(-16px -11px); }
+.flag-BG, .flag-BGN { @include country-flag(-32px -11px); }
+.flag-BH { @include country-flag(-48px -11px); }
+.flag-BI { @include country-flag(-64px -11px); }
+.flag-BJ { @include country-flag(-80px -11px); }
+.flag-BM { @include country-flag(-96px -11px); }
+.flag-BN { @include country-flag(-112px -11px); }
+.flag-BO { @include country-flag(-128px -11px); }
+.flag-BR, .flag-BRL, .flag-BRE { @include country-flag(-144px -11px); }
+.flag-BS { @include country-flag(-160px -11px); }
+.flag-BT { @include country-flag(-176px -11px); }
+.flag-BV { @include country-flag(-192px -11px); }
+.flag-BW { @include country-flag(-208px -11px); }
+.flag-BY { @include country-flag(-224px -11px); }
+.flag-BZ { @include country-flag(-240px -11px); }
+.flag-CA, .flag-CAD { @include country-flag(-256px -11px); }
+.flag-CATALONIA { @include country-flag(-272px -11px); }
+.flag-CC { @include country-flag(-288px -11px); }
+.flag-CD { @include country-flag(0px -22px); }
+.flag-CF { @include country-flag(-16px -22px); }
+.flag-CG { @include country-flag(-32px -22px); }
+.flag-CH, .flag-CHF { @include country-flag(-48px -22px); }
+.flag-CI { @include country-flag(-64px -22px); }
+.flag-CK { @include country-flag(-80px -22px); }
+.flag-CL, .flag-CLP, .flag-CLF { @include country-flag(-96px -22px); }
+.flag-CM { @include country-flag(-112px -22px); }
+.flag-CN, .flag-CNY, .flag-CNH { @include country-flag(-128px -22px); }
+.flag-CO, .flag-COP { @include country-flag(-144px -22px); }
+.flag-CR { @include country-flag(-160px -22px); }
+.flag-CS { @include country-flag(-176px -22px); }
+.flag-CU { @include country-flag(-192px -22px); }
+.flag-CV { @include country-flag(-208px -22px); }
+.flag-CX { @include country-flag(-224px -22px); }
+.flag-CY { @include country-flag(-240px -22px); }
+.flag-CZ, .flag-CZK { @include country-flag(-256px -22px); }
+.flag-DE { @include country-flag(-272px -22px); }
+.flag-DJ { @include country-flag(-288px -22px); }
+.flag-DK, .flag-DKK { @include country-flag(0px -33px); }
+.flag-DM { @include country-flag(-16px -33px); }
+.flag-DO { @include country-flag(-32px -33px); }
+.flag-DZ { @include country-flag(-48px -33px); }
+.flag-EC { @include country-flag(-64px -33px); }
+.flag-EE, .flag-EEK { @include country-flag(-80px -33px); }
+.flag-EG, .flag-EGP { @include country-flag(-96px -33px); }
+.flag-EH { @include country-flag(-112px -33px); }
+.flag-ENGLAND { @include country-flag(-128px -33px); }
+.flag-ER { @include country-flag(-144px -33px); }
+.flag-ES { @include country-flag(-160px -33px); }
+.flag-ET { @include country-flag(-176px -33px); }
+.flag-EU, .flag-EUR { @include country-flag(-192px -33px); }
+.flag-FA, .flag-FAM { @include country-flag(-208px -33px); }
+.flag-FI { @include country-flag(-224px -33px); }
+.flag-FJ { @include country-flag(-240px -33px); }
+.flag-FK { @include country-flag(-256px -33px); }
+.flag-FM { @include country-flag(-272px -33px); }
+.flag-FO { @include country-flag(-288px -33px); }
+.flag-FR { @include country-flag(0px -44px); }
+.flag-GA { @include country-flag(-16px -44px); }
+.flag-GB, .flag-GBP, .flag-UK { @include country-flag(-32px -44px); }
+.flag-GD { @include country-flag(-48px -44px); }
+.flag-GE { @include country-flag(-64px -44px); }
+.flag-GF { @include country-flag(-80px -44px); }
+.flag-GH { @include country-flag(-96px -44px); }
+.flag-GI, .flag-GIP { @include country-flag(-112px -44px); }
+.flag-GL { @include country-flag(-128px -44px); }
+.flag-GM { @include country-flag(-144px -44px); }
+.flag-GN { @include country-flag(-160px -44px); }
+.flag-GP { @include country-flag(-176px -44px); }
+.flag-GQ { @include country-flag(-192px -44px); }
+.flag-GR { @include country-flag(-208px -44px); }
+.flag-GS { @include country-flag(-224px -44px); }
+.flag-GT { @include country-flag(-240px -44px); }
+.flag-GU { @include country-flag(-256px -44px); }
+.flag-GW { @include country-flag(-272px -44px); }
+.flag-GY { @include country-flag(-288px -44px); }
+.flag-HK, .flag-HKD, .flag-ASIA { @include country-flag(0px -55px); }
+.flag-HM { @include country-flag(-16px -55px); }
+.flag-HN { @include country-flag(-32px -55px); }
+.flag-HR, .flag-HRK { @include country-flag(-48px -55px); }
+.flag-HT { @include country-flag(-64px -55px); }
+.flag-HU, .flag-HUF { @include country-flag(-80px -55px); }
+.flag-ID, .flag-IDR { @include country-flag(-96px -55px); }
+.flag-IE { @include country-flag(-112px -55px); }
+.flag-IL, .flag-ILS { @include country-flag(-128px -55px); }
+.flag-IN, .flag-INR { @include country-flag(-144px -55px); }
+.flag-IO { @include country-flag(-160px -55px); }
+.flag-IQ { @include country-flag(-176px -55px); }
+.flag-IR { @include country-flag(-192px -55px); }
+.flag-IS, .flag-ISK { @include country-flag(-208px -55px); }
+.flag-IT { @include country-flag(-224px -55px); }
+.flag-JM { @include country-flag(-240px -55px); }
+.flag-JO, .flag-JOD { @include country-flag(-256px -55px); }
+.flag-JP, .flag-JPY { @include country-flag(-272px -55px); }
+.flag-KE { @include country-flag(-288px -55px); }
+.flag-KG { @include country-flag(0px -66px); }
+.flag-KH { @include country-flag(-16px -66px); }
+.flag-KI { @include country-flag(-32px -66px); }
+.flag-KM { @include country-flag(-48px -66px); }
+.flag-KN { @include country-flag(-64px -66px); }
+.flag-KP { @include country-flag(-80px -66px); }
+.flag-KR, .flag-KRW { @include country-flag(-96px -66px); }
+.flag-KW { @include country-flag(-112px -66px); }
+.flag-KY { @include country-flag(-128px -66px); }
+.flag-KZ { @include country-flag(-144px -66px); }
+.flag-LA { @include country-flag(-160px -66px); }
+.flag-LB { @include country-flag(-176px -66px); }
+.flag-LC { @include country-flag(-192px -66px); }
+.flag-LI { @include country-flag(-208px -66px); }
+.flag-LK { @include country-flag(-224px -66px); }
+.flag-LR { @include country-flag(-240px -66px); }
+.flag-LS { @include country-flag(-256px -66px); }
+.flag-LT { @include country-flag(-272px -66px); }
+.flag-LU { @include country-flag(-288px -66px); }
+.flag-LV, .flag-LVL { @include country-flag(0px -77px); }
+.flag-LY { @include country-flag(-16px -77px); }
+.flag-MA, .flag-MAD { @include country-flag(-32px -77px); }
+.flag-MC { @include country-flag(-48px -77px); }
+.flag-MD { @include country-flag(-64px -77px); }
+.flag-ME { @include country-flag(-80px -77px); }
+.flag-MG { @include country-flag(-96px -77px); }
+.flag-MH { @include country-flag(-112px -77px); }
+.flag-MK { @include country-flag(-128px -77px); }
+.flag-ML { @include country-flag(-144px -77px); }
+.flag-MM { @include country-flag(-160px -77px); }
+.flag-MN { @include country-flag(-176px -77px); }
+.flag-MO { @include country-flag(-192px -77px); }
+.flag-MP { @include country-flag(-208px -77px); }
+.flag-MQ { @include country-flag(-224px -77px); }
+.flag-MR { @include country-flag(-240px -77px); }
+.flag-MS { @include country-flag(-256px -77px); }
+.flag-MT { @include country-flag(-272px -77px); }
+.flag-MU { @include country-flag(-288px -77px); }
+.flag-MV { @include country-flag(0px -88px); }
+.flag-MW { @include country-flag(-16px -88px); }
+.flag-MX, .flag-MXN, .flag-MXV { @include country-flag(-32px -88px); }
+.flag-MY, .flag-MYR { @include country-flag(-48px -88px); }
+.flag-MZ { @include country-flag(-64px -88px); }
+.flag-NA { @include country-flag(-80px -88px); }
+.flag-NC { @include country-flag(-96px -88px); }
+.flag-NE { @include country-flag(-112px -88px); }
+.flag-NF { @include country-flag(-128px -88px); }
+.flag-NG, .flag-NGN { @include country-flag(-144px -88px); }
+.flag-NI { @include country-flag(-160px -88px); }
+.flag-NL { @include country-flag(-176px -88px); }
+.flag-NO, .flag-NOK { @include country-flag(-192px -88px); }
+.flag-NP { @include country-flag(-208px -88px); }
+.flag-NR { @include country-flag(-224px -88px); }
+.flag-NU { @include country-flag(-240px -88px); }
+.flag-NZ, .flag-NZD { @include country-flag(-256px -88px); }
+.flag-OM, .flag-OMR { @include country-flag(-272px -88px); }
+.flag-PA { @include country-flag(-288px -88px); }
+.flag-PE, .flag-PEN { @include country-flag(0px -99px); }
+.flag-PF { @include country-flag(-16px -99px); }
+.flag-PG { @include country-flag(-32px -99px); }
+.flag-PH, .flag-PHP { @include country-flag(-48px -99px); }
+.flag-PK, .flag-PKR { @include country-flag(-64px -99px); }
+.flag-PL, .flag-PLN { @include country-flag(-80px -99px); }
+.flag-PM { @include country-flag(-96px -99px); }
+.flag-PN { @include country-flag(-112px -99px); }
+.flag-PR { @include country-flag(-128px -99px); }
+.flag-PS { @include country-flag(-144px -99px); }
+.flag-PT { @include country-flag(-160px -99px); }
+.flag-PW { @include country-flag(-176px -99px); }
+.flag-PY { @include country-flag(-192px -99px); }
+.flag-QA, .flag-QAR { @include country-flag(-208px -99px); }
+.flag-RE { @include country-flag(-224px -99px); }
+.flag-RO, .flag-ROL, .flag-RON { @include country-flag(-240px -99px); }
+.flag-RS { @include country-flag(-256px -99px); }
+.flag-RU, .flag-RUSSIA, .flag-RUB { @include country-flag(-272px -99px); }
+.flag-RW { @include country-flag(-288px -99px); }
+.flag-SA, .flag-SAR { @include country-flag(0px -110px); }
+.flag-SB { @include country-flag(-16px -110px); }
+.flag-SC { @include country-flag(-32px -110px); }
+.flag-SCOTLAND { @include country-flag(-48px -110px); }
+.flag-SD { @include country-flag(-64px -110px); }
+.flag-SE, .flag-SEK { @include country-flag(-80px -110px); }
+.flag-SG, .flag-SGD { @include country-flag(-96px -110px); }
+.flag-SH { @include country-flag(-112px -110px); }
+.flag-SI, .flag-SIT { @include country-flag(-128px -110px); }
+.flag-SJ { @include country-flag(-144px -110px); }
+.flag-SK, .flag-SKK { @include country-flag(-160px -110px); }
+.flag-SL { @include country-flag(-176px -110px); }
+.flag-SM { @include country-flag(-192px -110px); }
+.flag-SN { @include country-flag(-208px -110px); }
+.flag-SO { @include country-flag(-224px -110px); }
+.flag-SR { @include country-flag(-240px -110px); }
+.flag-ST { @include country-flag(-256px -110px); }
+.flag-SV { @include country-flag(-272px -110px); }
+.flag-SY { @include country-flag(-288px -110px); }
+.flag-SZ { @include country-flag(0px -121px); }
+.flag-TC { @include country-flag(-16px -121px); }
+.flag-TD { @include country-flag(-32px -121px); }
+.flag-TF { @include country-flag(-48px -121px); }
+.flag-TG { @include country-flag(-64px -121px); }
+.flag-TH, .flag-THB { @include country-flag(-80px -121px); }
+.flag-TJ { @include country-flag(-96px -121px); }
+.flag-TK { @include country-flag(-112px -121px); }
+.flag-TL { @include country-flag(-128px -121px); }
+.flag-TM { @include country-flag(-144px -121px); }
+.flag-TN { @include country-flag(-160px -121px); }
+.flag-TO { @include country-flag(-176px -121px); }
+.flag-TR, .flag-TRY { @include country-flag(-192px -121px); }
+.flag-TT { @include country-flag(-208px -121px); }
+.flag-TV { @include country-flag(-224px -121px); }
+.flag-TW, .flag-TWD { @include country-flag(-240px -121px); }
+.flag-TZ { @include country-flag(-256px -121px); }
+.flag-UA, .flag-KWD { @include country-flag(-272px -121px); }
+.flag-UG { @include country-flag(-288px -121px); }
+.flag-UM { @include country-flag(0px -132px); }
+.flag-US, .flag-USD, .flag-USA { @include country-flag(-16px -132px); }
+.flag-UY { @include country-flag(-32px -132px); }
+.flag-UZ { @include country-flag(-48px -132px); }
+.flag-VA { @include country-flag(-64px -132px); }
+.flag-VC { @include country-flag(-80px -132px); }
+.flag-VE, .flag-VENEZUELA, .flag-VEB { @include country-flag(-96px -132px); }
+.flag-VG { @include country-flag(-112px -132px); }
+.flag-VI { @include country-flag(-128px -132px); }
+.flag-VN, .flag-VND { @include country-flag(-144px -132px); }
+.flag-VU { @include country-flag(-160px -132px); }
+.flag-WALES { @include country-flag(-176px -132px); }
+.flag-WF { @include country-flag(-192px -132px); }
+.flag-WS { @include country-flag(-208px -132px); }
+.flag-XBT { @include country-flag(-16px -143px); }
+.flag-YE { @include country-flag(-224px -132px); }
+.flag-YT { @include country-flag(-240px -132px); }
+.flag-ZA, .flag-ZAR { @include country-flag(-256px -132px); }
+.flag-ZM { @include country-flag(-272px -132px); }
+.flag-ZW { @include country-flag(-288px -132px); }
+

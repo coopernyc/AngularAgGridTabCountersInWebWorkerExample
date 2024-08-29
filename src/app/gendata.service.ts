@@ -15,11 +15,18 @@ export class GenDataService {
     this.publish$ = range(1, 10000).pipe(
       concatMap(() => {
         const order: IOrder = {
-          OrderId: 'ORDER-' + _.padStart(1 + Math.floor(Math.random() * 10000).toString(), 5, '0'),
+          OrderId: 'ORDER-' + _.padStart(1 + Math.floor(Math.random() * 1000).toString(), 5, '0'),
           Price: Math.random() * 100,
           State: _.sample(Object.values(OrderStateEnum)) as OrderStateEnum,
           Currency: _.sample(Object.values(CurrencyEnum)) as CurrencyEnum,
-          ProductType: _.sample(Object.values(ProductTypeEnum)) as ProductTypeEnum
+          ProductType: _.sample(Object.values(ProductTypeEnum)) as ProductTypeEnum,
+          BasketId: _.sample([0, 2]) === 0 ? 'BASKET-' + 'XXX': undefined,
+          Side: _.sample(['Buy','Sell']),
+          OrderType: _.sample(['Voice','Electronic']),
+          Quantity: Math.random() * 10000,
+          OrderTime: (new Date()).toLocaleString(),
+          Trader: _.sample(['Vasya Pupkin', 'Sonia Goldhand', 'Masha Cooper']),
+          Broker: _.sample(['BOA', 'CITI', 'DEUTSCHE BANK', 'JPMORGAN', 'GOLDMAN'])
         };
         return of(order).pipe(
           delay(10 + (Math.random() * 200))
