@@ -32,15 +32,16 @@
         text-align: right;
 
         span {
-          border-radius: 25%;
+          border-radius: 5px;
           padding: 2px 8px;
-          background-color: #060;
-          color: #fff;
+          background-color: #fff;
+          color: #333;
           font-size: 11px;
         }
 
         &.critical {
           span {
+            color: yellow;
             background-color: #b00;
           }
         }

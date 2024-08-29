@@ -47,7 +47,7 @@ export class AppComponent {
       field: "OrderType",
       headerName: "Order Type",
       cellClass: params => 'order-type-' + params.value.toLowerCase(),
-      maxWidth: 150
+      maxWidth: 120
     },
     {
       field: "State",
@@ -64,13 +64,13 @@ export class AppComponent {
       width: 100
     },
     {field: "Side", cellClass: params => 'order-side-' + params.value.toLowerCase(), maxWidth: 80},
-    {field: "Currency", maxWidth: 100, cellRenderer: CurrencyRenderer},
     {
       field: "Price",
       valueFormatter: params => this.numberFormatter.format(params.value.toFixed(2)),
       cellClass: 'numeric',
       width: 100
     },
+    {field: "Currency", maxWidth: 100, cellRenderer: CurrencyRenderer},
     {field: "Broker", width: 150},
     {field: "BasketId", headerName: "Basket ID", maxWidth: 120},
     {field: "OrderTime", headerName: "Order Time", maxWidth: 200},
@@ -123,7 +123,7 @@ export class AppComponent {
       },
       {
         id: 'Basket',
-        headerName: 'Incl. Basket ID',
+        headerName: 'In Basket',
         selected: false,
         predicate: (order: IOrder) => basketPredicate(order)
       }

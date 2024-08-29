@@ -11,7 +11,7 @@ import {
 import _ from "lodash";
 
 export enum OrderStateEnum {
-  Active = "Active",
+  Trading = "Trading",
   Cancelled = "Cancelled",
   Failed = "Failed",
   Filled = "Filled"

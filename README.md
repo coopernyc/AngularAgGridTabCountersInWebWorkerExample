@@ -1,27 +1,23 @@
-# AngularAgGridTabCountersWebWorkerExample
+# AngularBlotterWebWorkerExample
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.1.
+This is an example project demonstrating performance optimization concepts when dealing with high frequency high volume updates in SPA Singe-page Application such as: distinct throttling, lazy sampling, transactional delta updates and offload heavy calculations into a separate thread with Web Workers.
 
-## Development server
+## Task
+Optimize Blotter (order grid in financial applications) for consistent, responsive and lighting speed rendering on massive data updates. Given groups of related filter tabs, allowing to quick filter displayed data in the Blotter and showing total order counts for a specific condition in a filter tab.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+![Alt Blotter](./Blotter-001.png)
 
-## Code scaffolding
+Here are three groups of filter tabs:
+1. Product type group, mutual exclusive selection;
+2. Order state group, multiple selection. Counters reflect Product type group selection;
+3. Extra mixed selection group, e.g. "Voice" and "Electronic" filters are mutual exclusive, but Basket filter tab is not. Order counts reflect product and state groups selections.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Below is an example of selecting Commodity electronic and basket orders in Cancelled or Failed state
 
-## Build
+![Alt Blotter with filter selection](./Blotter-002.png)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Example application generates 10000 random orders (new and updates by OrderId) with high random frequency. 
 
-## Running unit tests
+Application receives order updates, it throttles update order events and picks only most recent order updates by specified interval, then it sends resulting small batch of updates for delta transaction update/rendering to the Blotter grid and to the spawned Web Worker which performs order counts calculation in a separate thread. 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Worker keeps it's tab/orders data in sync by receiving tab configuration /selection changes and batches of order updates from main application. Since data is copied between thread it is important to maintain small batches to minimize costs of serialization/deserialization between threads.

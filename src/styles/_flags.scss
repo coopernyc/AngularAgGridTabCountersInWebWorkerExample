@@ -1,13 +1,13 @@
 @mixin country-flag($pos) {
   display: inline-block;
-  height: 11px !important;
+  height: 10px !important;
   width: 16px !important;
   background: url('../../public/flags.png') $pos;
   margin-right: 4px;
   border: 1px solid #777;
   align-self: center;
-  //padding-top: 2px;
-  box-shadow: 1px 1px 1px #333;
+  margin-bottom: 1px;
+  //box-shadow: 1px 1px 3px #333;
 }
 
 .flag-value { margin-left: 4px; }
