@@ -88,6 +88,7 @@ class TabCounterWorker {
           if (tabs.length) {
             this.stateTabsModel.update(tabs);
           }
+          this.source$.next();
           break;
       }
     });
