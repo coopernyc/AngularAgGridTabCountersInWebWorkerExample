@@ -16,20 +16,21 @@ This TypeScript project uses [NodeJS](www.nodejs.org), [Angular](www.angular.dev
 
 Optimize a Blotter (order grid) for financial applications to ensure consistent, responsive, and lightning-fast rendering, even with massive data updates. 
 
-The Blotter should:
-Support quick filtering based on various criteria.
-Display total order counts for specific filter conditions.
-Filter Groups
+### The Blotter should:
+* Support quick filtering based on various criteria.
+* Display total order counts for specific filter conditions.
+
+### Filter Groups
 
 The Blotter includes three filter groups:
 
-* Product Type: Mutual exclusive selection.
-* Order State: Multiple selection. Counters reflect Product Type group selection.
-* Extra Mixed Selection: Includes mutual exclusive filters like "Voice" and "Electronic," as well as non-exclusive filters like "Basket." Order counts reflect Product Type and Order State group selections.
+* **Product Type**: Mutual exclusive selection.
+* **Order State**: Multiple selection. Counters reflect Product Type group selection.
+* **Extra** mixed selection: Includes mutual exclusive filters like "Voice" and "Electronic," as well as non-exclusive filters like "Basket." Order counts reflect Product Type and Order State group selections.
 
 ![Alt Blotter](./Blotter-001.png)
 
-Example: Selecting "Commodity," "Electronic," and "Basket" orders in a "Cancelled" or "Failed" state.
+Below is selecting filters for "Commodity," "Electronic," and "Basket" orders in a "Cancelled" or "Failed" state.
 
 ![Alt Blotter with filter selection](./Blotter-002.png)
 
