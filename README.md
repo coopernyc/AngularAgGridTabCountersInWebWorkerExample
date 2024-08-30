@@ -54,4 +54,4 @@ The application generates 10,000 random orders (new and updates) with high frequ
 
 ## Demo
 
-Run [live demo here](https://stackblitz.com/~/github.com/coopernyc/AngularAgGridTabCountersInWebWorkerExample)
+Run [live demo here](https://stackblitz.com/~/github.com/coopernyc/AngularAgGridTabCountersInWebWorkerExample){:target="_blank"}
