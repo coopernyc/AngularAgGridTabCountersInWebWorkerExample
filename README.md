@@ -51,3 +51,7 @@ The application generates 10,000 random orders (new and updates) with high frequ
 
 
 * **Ag-Grid Delta Updates**: The application uses Ag-Grid for the Blotter, which supports delta updates for faster rendering of changes.
+
+## Demo
+
+Run [live demo here](https://stackblitz.com/~/github.com/coopernyc/AngularAgGridTabCountersInWebWorkerExample)
