@@ -29,7 +29,6 @@ import {CurrencyRenderer} from "./currency.renderer";
 })
 export class AppComponent {
 
-
   private readonly model: GridModel<string, IOrder> = new GridModel<string, IOrder>((value: IOrder) => value.OrderId);
   private readonly destroyRef = inject(DestroyRef);
   private readonly THROTTLE_TIME = 300;
@@ -85,20 +84,22 @@ export class AppComponent {
       throw new Error('Worker is not supported');
     }
 
-    this.productTypeTabsModel.update({
-      id: 'All',
-      headerName: 'All',
-      selected: true,
-      predicate: () => true
-    })
-    this.productTypeTabsModel.update(Object.values(ProductTypeEnum).map(name => {
-      return {
-        id: name,
-        headerName: name,
-        selected: false,
-        predicate: (order: IOrder) => productTypePredicate(order, name)
-      } as IFilterTab;
-    }));
+    this.productTypeTabsModel.update([
+      {
+        id: 'All',
+        headerName: 'All',
+        selected: true,
+        predicate: () => true
+      },
+      ...Object.values(ProductTypeEnum).map(name => {
+        return {
+          id: name,
+          headerName: name,
+          selected: false,
+          predicate: (order: IOrder) => productTypePredicate(order, name)
+        } as IFilterTab;
+      })
+    ]);
     this.stateTabsModel.update(Object.values(OrderStateEnum).map(name => {
       return {
         id: name,
@@ -140,22 +141,22 @@ export class AppComponent {
   private gridReady(event: GridReadyEvent<any>) {
     this.model.gridApi = event.api;
 
-    const updateTab = (data: IOrder[], model: Model<string, IFilterTab>) => {
-      model.update(_.map(data, (v: any, k: string) => {
-        const tab = model.get(k)!;
-        if (tab) {
-          tab.counter = v;
-        }
-        return tab;
-      }).filter(tab => !!tab));
+    const updateTabs = (data: IOrder[], ...models: Model<string, IFilterTab>[]) => {
+      models.forEach(model => {
+        model.update(_.map(data, (v: any, k: string) => {
+          const tab = model.get(k)!;
+          if (tab) {
+            tab.counter = v;
+          }
+          return tab;
+        }).filter(tab => !!tab));
+      });
     }
 
     if (this.worker) {
       this.worker.onmessage = ({data}) => {
         console.log('Blotter received tab counters');
-        updateTab(data, this.productTypeTabsModel);
-        updateTab(data, this.stateTabsModel);
-        updateTab(data, this.extraTabsModel);
+        updateTabs(data, this.productTypeTabsModel, this.stateTabsModel, this.extraTabsModel);
       }
       this.worker.postMessage({
         topic: WorkerTopic.Setup,
@@ -168,7 +169,7 @@ export class AppComponent {
     }
     this.generator.publish$.pipe(
       takeUntilDestroyed(this.destroyRef),
-      distinctThrottle(this.THROTTLE_TIME, x => x.OrderId)
+      distinctThrottle(this.THROTTLE_TIME, (x: IOrder) => x.OrderId)
     ).subscribe((orders: IOrder[]) => {
       this.model.updateGrid(orders);
       if (this.worker) {
