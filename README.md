@@ -47,7 +47,7 @@ The application generates 10,000 random orders (new and updates) with high frequ
 * **Data Synchronization**: The Web Worker maintains its own tab/orders data and receives configuration changes and order updates from the main application. 
 
 
-* **Lazy Sampling**: The Web Worker performs calculations only when necessary and at intervals. When calculations are done, Worker communicate the result back to the main thread to render.
+* **Lazy Sampling**: The Web Worker performs calculations only when necessary and at intervals. Once calculations are finished, workers notify the main thread, which renders the results in the tabs.
 
 
 * **Ag-Grid Delta Updates**: The application uses Ag-Grid for the Blotter, which supports delta updates for faster rendering of changes.
