@@ -2,6 +2,19 @@
 
 This is an example project demonstrating performance optimization concepts when dealing with high frequency high volume updates in SPA Singe-page Application such as: distinct throttling, lazy sampling, transactional delta updates and offload heavy calculations into a separate thread with Web Workers.
 
+## Installation
+
+This application is written in TypeScript and is using [NodeJS](www.nodejs.org), [Angular](www.angular.dev) and [Ag-Grid](www.ag-grid.com).
+
+Clone & cd to project, then run 
+
+````
+npm install
+````
+
+This application is only for demonstration and proving of concept purposes. 
+It is not ready to use in production code.
+
 ## Task
 Optimize Blotter (order grid in financial applications) for consistent, responsive and lighting speed rendering on massive data updates. Given groups of related filter tabs, allowing to quick filter displayed data in the Blotter and showing total order counts for a specific condition in a filter tab.
 
