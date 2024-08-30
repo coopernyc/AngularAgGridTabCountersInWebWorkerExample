@@ -1,40 +1,54 @@
-# AngularBlotterWebWorkerExample
+# A Performance-Optimized Angular Application
 
-This is an example project demonstrating performance optimization concepts when dealing with high frequency high volume updates in SPA Singe-page Application such as: distinct throttling, lazy sampling, transactional delta updates and offload heavy calculations into a separate thread with Web Workers.
+This project demonstrates effective techniques for handling high-frequency, high-volume updates in Single-Page Applications (SPAs). By employing strategies like distinct throttling, lazy sampling, transactional delta updates, and Web Workers, we've optimized performance for scenarios like financial applications with large, rapidly-changing order grids (Blotters).
 
-## Installation
+## Project Setup
 
-This application is written in TypeScript and is using [NodeJS](www.nodejs.org), [Angular](www.angular.dev) and [Ag-Grid](www.ag-grid.com).
+This TypeScript project uses [NodeJS](www.nodejs.org), [Angular](www.angular.dev) and [Ag-Grid](www.ag-grid.com). To get started:
 
-Clone & cd to project, then run 
+1. Clone the repository.
+2. Navigate to the project directory.
+3. Run ``npm install``.
 
-````
-npm install
-````
+**Note**: This project is for demonstration purposes only and is not production-ready.
 
-This application is only for demonstration and proving of concept purposes. 
-It is not ready to use in production code.
+## The Challenge
 
-## Task
-Optimize Blotter (order grid in financial applications) for consistent, responsive and lighting speed rendering on massive data updates. Given groups of related filter tabs, allowing to quick filter displayed data in the Blotter and showing total order counts for a specific condition in a filter tab.
+Optimize a Blotter (order grid) for financial applications to ensure consistent, responsive, and lightning-fast rendering, even with massive data updates. 
+
+The Blotter should:
+Support quick filtering based on various criteria.
+Display total order counts for specific filter conditions.
+Filter Groups
+
+The Blotter includes three filter groups:
+
+* Product Type: Mutual exclusive selection.
+* Order State: Multiple selection. Counters reflect Product Type group selection.
+* Extra Mixed Selection: Includes mutual exclusive filters like "Voice" and "Electronic," as well as non-exclusive filters like "Basket." Order counts reflect Product Type and Order State group selections.
 
 ![Alt Blotter](./Blotter-001.png)
 
-Here are three groups of filter tabs:
-1. Product type group, mutual exclusive selection;
-2. Order state group, multiple selection. Counters reflect Product type group selection;
-3. Extra mixed selection group, e.g. "Voice" and "Electronic" filters are mutual exclusive, but Basket filter tab is not. Order counts reflect product and state groups selections.
-
-Below is an example of selecting Commodity electronic and basket orders in Cancelled or Failed state
+Example: Selecting "Commodity," "Electronic," and "Basket" orders in a "Cancelled" or "Failed" state.
 
 ![Alt Blotter with filter selection](./Blotter-002.png)
 
-Example application generates 10000 random orders (new and updates by OrderId) with high random frequency. 
+The application generates 10,000 random orders (new and updates) with high frequency.
 
 Application receives order updates, it throttles update events and picks only most recent order updates by interval, then it sends resulting small batch of updates for delta transaction update/rendering to the Blotter grid and to the Web Worker for order counts calculation. 
 
-Worker keeps it's tab/orders data in sync by receiving tab configuration /selection changes and batches of order updates from main application. Since data is copied between thread it is important to maintain small batches to minimize costs of serialization/deserialization between threads.
+## Optimization Techniques
 
-Worker uses lazy sampling to performs calculation of counts by interval and only if there are changes.
+* **Throttling and Batching**: The human eye can't detect changes faster than about 300 milliseconds. Order updates are throttled, and only the most recent updates are selected within intervals, limiting the number of updates sent to the Blotter. These updates are then sent in smaller batches to delta update grid and to the web worker, which handles heavy calculation processing. By sending updates in batches, we reduce the overhead of transferring data between the main thread and the web worker, leading to smoother performance.
 
-Application is using [Ag-Grid](www.ag-grid.com) for the Blotter. Ag-Grid supports delta/transaction updates for speed rendering of changes.
+
+* **Web Worker Offloading**: Heavy calculations (e.g., order count calculations) are offloaded to a Web Worker to avoid blocking the main thread.
+
+
+* **Data Synchronization**: The Web Worker maintains its own tab/orders data and receives configuration changes and order updates from the main application. 
+
+
+* **Lazy Sampling**: The Web Worker performs calculations only when necessary and at intervals.
+
+
+* **Ag-Grid Delta Updates**: The application uses Ag-Grid for the Blotter, which supports delta updates for faster rendering of changes.
