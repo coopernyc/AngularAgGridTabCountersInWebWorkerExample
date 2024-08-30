@@ -35,8 +35,6 @@ Example: Selecting "Commodity," "Electronic," and "Basket" orders in a "Cancelle
 
 The application generates 10,000 random orders (new and updates) with high frequency.
 
-Application receives order updates, it throttles update events and picks only most recent order updates by interval, then it sends resulting small batch of updates for delta transaction update/rendering to the Blotter grid and to the Web Worker for order counts calculation. 
-
 ## Optimization Techniques
 
 * **Throttling and Batching**: The human eye can't detect changes faster than about 300 milliseconds. Order updates are throttled, and only the most recent updates are selected within intervals, limiting the number of updates sent to the Blotter. These updates are then sent in smaller batches to delta update grid and to the web worker, which handles heavy calculation processing. By sending updates in batches, we reduce the overhead of transferring data between the main thread and the web worker, leading to smoother performance.
