@@ -4,7 +4,7 @@ import {
   defer, exhaustMap,
   filter, finalize,
   map,
-  MonoTypeOperatorFunction, Observable,
+  MonoTypeOperatorFunction, Observable, OperatorFunction,
   pipe,
   ReplaySubject, takeUntil, takeWhile, tap
 } from "rxjs";
@@ -21,7 +21,9 @@ export enum CurrencyEnum {
   USD = "USD",
   CAD = "CAD",
   JPY = "JPY",
-  EUR = "EUR"
+  EUR = "EUR",
+  RUB = "RUB",
+  CNY = "CNY"
 }
 
 export enum ProductTypeEnum {
@@ -58,18 +60,25 @@ export interface IFilterTab {
 
 export const TAB_COUNTERS_CALC_INTERVAL = 1000;
 
-export const distinctThrottle = (throttleTime: number, keySelector: (value: any) => any) => pipe(
-  bufferTime(throttleTime),
-  filter(buf => !!buf.length),
-  map(buf => {
-    return [...buf
-      .reduce((acc: Map<any, any>, cur) => {
-        acc.set(keySelector(cur), cur);
-        return acc;
-      }, new Map<any, any>())
-      .values()]
-  })
-);
+export function distinctThrottle<K, T>(
+  throttleTime: number,
+  keySelector: (value: T) => K
+): OperatorFunction<T, T[]> {
+  return (source) => defer(() => {
+    return source.pipe(
+      bufferTime(throttleTime),
+      filter(buf => !!buf.length),
+      map(buf => {
+        return [...buf
+          .reduce((acc: Map<K, T>, cur: T) => {
+            acc.set(keySelector(cur), cur);
+            return acc;
+          }, new Map<K, T>())
+          .values()];
+      })
+    );
+  });
+}
 
 export function lazySample<T>(
   notifierSelector: (value: T | null) => Observable<any>,
